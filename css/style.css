@@ -57,7 +57,7 @@ button{
     border: none;
     text-align: center;
     color: black;
-    background-color: yellow;
+    background-color: lightgoldenrodyellow;
 }
 
 .timer{
@@ -68,7 +68,7 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: green;   
+    color: lightgreen;
 }
 
 /* rimuovo freccette laterali input number */

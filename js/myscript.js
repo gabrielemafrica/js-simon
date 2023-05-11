@@ -8,6 +8,9 @@ const elContainerNum = document.getElementById('container');
 const elContainerConsegna = document.getElementById('consegna');
 const elContainerTimer = document.getElementById('container-timer');
 
+//variabile per numeri indovinati
+let elNumeriIndovinati = 0;
+
 //iniziamo
 elPlay.addEventListener(
     "click",
@@ -43,17 +46,20 @@ elPlay.addEventListener(
         elOrologio.append(h2)
         elContainerTimer.append(elOrologio);
 
-        let elSeconds = 2;
+        //inizializzo il timer
+        let elSeconds = 30;
 
+        //setto intervallo
         let elTimer = setInterval(
             function () {
                 h2.innerHTML = elSeconds;
                 elSeconds--;
+                //quando finisce il timer
                 if (elSeconds < 0) {
+                    //pulisco cio che non serve piu
                     clearInterval(elTimer);
-                    // elContainerNum.innerHTML = '';
-                    // elSquare.innerHTML = '';
                     elContainerTimer.innerHTML = '';
+                    //inserisco la consegna
                     elConsegna = "<h1>Riscrivi i numeri</h1>";
                     elContainerConsegna.innerHTML = elConsegna;
 
@@ -66,7 +72,39 @@ elPlay.addEventListener(
                     }
                     const elVerifica = `<button type="button" id="verifica">VERIFICA</button>`;
                     elContainerTimer.innerHTML = elVerifica;
-                    const elInserimento = createElemento();
+                    //veifica numeri
+                    const elButtonVerifica = document.getElementById('verifica');
+
+                    elButtonVerifica.addEventListener('click', 
+                        function () {
+                            //ottengo i numeri
+                            const arrayInput = document.getElementsByClassName('solution');
+                            const arrayNumeri = [];
+                            
+                            for (let i = 0; i < arrayInput.length; i++) {
+                                const elementInput = arrayInput[i];
+                                const elInput = parseInt(elementInput.value);
+                                arrayNumeri.push(elInput);
+                                if(arrayNumeriDaRicordare.includes(elInput)){
+                                    elNumeriIndovinati++;
+                                    elementInput.style.backgroundColor = 'lightgreen';
+                                    console.log(elInput, 'numero corretto');
+                                }else{
+                                    elementInput.style.backgroundColor = 'red';
+                                    console.log(elInput, 'numero errato');
+                                }
+                            } 
+                            const commento = `<h2>Numeri corretti: ${elNumeriIndovinati}</h2>`;
+                            elContainerTimer.innerHTML = commento;
+                            
+
+
+                            
+
+                        }
+                    );
+
+                    
                 }
             },
             1000
@@ -111,7 +149,6 @@ function createElemento(tagType, classToAdd, objToIns) {
     newElement.append(objToIns)
     return newElement;
 }
-
 
 
 /*
