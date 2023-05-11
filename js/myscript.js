@@ -1,30 +1,70 @@
 //gioco ricorda i numeri
 
+//prendo il bottone
+const elPlay = document.getElementById("start");
+
 //prendo i container
-const containerNum = document.getElementById('container');
-const containerConsegna = document.getElementById('consegna');
+const elContainerNum = document.getElementById('container');
+const elContainerConsegna = document.getElementById('consegna');
+const elContainerTimer = document.getElementById('container-timer');
 
-//genero la consegna e la inserisco
-let consegna = "<h1>Ricorda i numeri</h1>";
-containerConsegna.innerHTML = consegna;
+//iniziamo
+elPlay.addEventListener(
+    "click",
 
-//genero i numeri
-const numeriDaRicordare = generaArray(1, 100, 5);
+    function(){
 
-//genero elementi e inseerisco i numeri
-for (let i = 0; i < numeriDaRicordare.length; i++) {
+        //pulisco il contenitore
+        elContainerNum.innerHTML = "";
+        elContainerConsegna.innerHTML = "";
 
-    const numero = numeriDaRicordare[i];
+        //genero la consegna e la inserisco
+        let elConsegna = "<h1>Memorizza i numeri</h1>";
+        elContainerConsegna.innerHTML = elConsegna;
 
-    //creo elemento che contiene i numeri
+        //genero i numeri
+        const arrayNumeriDaRicordare = generaArray(1, 100, 5);
 
-    const square = createElemento('div', 'square', numero);
+        //genero elementi e inseerisco i numeri
+        for (let i = 0; i < arrayNumeriDaRicordare.length; i++) {
 
-    //metto l'elemento nel container
-    containerNum.append(square);   
-}
+            const elNumero = arrayNumeriDaRicordare[i];
 
-//conto alla rovescia
+            //creo elemento che contiene i numeri
+            const elSquare = createElemento('div', 'square', elNumero);
+
+            //metto l'elemento nel container
+            elContainerNum.append(elSquare);   
+        }
+
+        //conto alla rovescia
+        const elOrologio = createElemento('div', 'timer', '');
+        const h2 = document.createElement('h2');
+        elOrologio.append(h2)
+        elContainerTimer.append(elOrologio);
+
+        let elSeconds = 30;
+
+        let elTimer = setInterval(
+            function () {
+                h2.innerHTML = elSeconds;
+                elSeconds--;
+                if (elSeconds < 0) {
+                    clearInterval(elTimer);
+                    elContainerNum.innerHTML = '';
+                    elContainerTimer.innerHTML = '';
+                    elConsegna = "<h1>Riscrivi i numeri</h1>";
+                    elContainerConsegna.innerHTML = elConsegna;
+
+                    //inserimento numeri
+                    const elInserimento = 
+                }
+            },
+            1000
+        );
+    }
+)
+
 
 
 //funzioni
