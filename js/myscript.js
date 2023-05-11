@@ -17,7 +17,7 @@ elPlay.addEventListener(
         //pulisco il contenitore
         elContainerNum.innerHTML = "";
         elContainerConsegna.innerHTML = "";
-
+        elContainerTimer.innerHTML = '';
         //genero la consegna e la inserisco
         let elConsegna = "<h1>Memorizza i numeri</h1>";
         elContainerConsegna.innerHTML = elConsegna;
@@ -43,7 +43,7 @@ elPlay.addEventListener(
         elOrologio.append(h2)
         elContainerTimer.append(elOrologio);
 
-        let elSeconds = 30;
+        let elSeconds = 2;
 
         let elTimer = setInterval(
             function () {
@@ -51,13 +51,22 @@ elPlay.addEventListener(
                 elSeconds--;
                 if (elSeconds < 0) {
                     clearInterval(elTimer);
-                    elContainerNum.innerHTML = '';
+                    // elContainerNum.innerHTML = '';
+                    // elSquare.innerHTML = '';
                     elContainerTimer.innerHTML = '';
                     elConsegna = "<h1>Riscrivi i numeri</h1>";
                     elContainerConsegna.innerHTML = elConsegna;
 
                     //inserimento numeri
-                    const elInserimento = 
+                    const arraySquare = document.getElementsByClassName('square');
+                    for (let i = 0; i < arraySquare.length; i++) {
+                        const elementSquare = arraySquare[i];
+                        const elInput = `<input type="number" class="solution" id="soluzione-${i + 1}">`;
+                        elementSquare.innerHTML = elInput;
+                    }
+                    const elVerifica = `<button type="button" id="verifica">VERIFICA</button>`;
+                    elContainerTimer.innerHTML = elVerifica;
+                    const elInserimento = createElemento();
                 }
             },
             1000
