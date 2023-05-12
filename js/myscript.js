@@ -84,13 +84,18 @@ elPlay.addEventListener(
                             for (let i = 0; i < arrayInput.length; i++) {
                                 const elementInput = arrayInput[i];
                                 const elInput = parseInt(elementInput.value);
-                                arrayNumeri.push(elInput);
+                                elementInput.style.backgroundColor = 'red';
+                                //conttrollo se il numero è tra quelli giusti
                                 if(arrayNumeriDaRicordare.includes(elInput)){
-                                    elNumeriIndovinati++;
-                                    elementInput.style.backgroundColor = 'lightgreen';
+                                    elementInput.style.backgroundColor = 'yellow';
                                     console.log(elInput, 'numero corretto');
+                                    //controllo se il numero corretto è già stato inserito
+                                    if (!arrayNumeri.includes(elInput)) {
+                                        elNumeriIndovinati++;
+                                        arrayNumeri.push(elInput);
+                                        elementInput.style.backgroundColor = 'lightgreen';
+                                    }
                                 }else{
-                                    elementInput.style.backgroundColor = 'red';
                                     console.log(elInput, 'numero errato');
                                 }
                             } 
